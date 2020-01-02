@@ -1,10 +1,10 @@
-var express = require("express");
+var express = _require("express");
 
 var router = express.Router ();
-var burger = require("../models/burger.js");
+var burger = _require("../models/burger.js");
 
 //route index
-router.get("/burgers", function(req, res){
+router.get("/burgers", function(_req, res){
     burger.all(function(burgerData){
         res.render("index", {burger_data: burgerData});
     });

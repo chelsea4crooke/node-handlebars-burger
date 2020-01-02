@@ -8,7 +8,7 @@ $(document).ready(function(){
         $.ajax({
             method: "PUT",
             url: "?burgers/" + burger_id
-        }).then(function(data){
+        }).then(function(_data){
             location.reload();
         });
     });

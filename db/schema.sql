@@ -9,3 +9,4 @@ CREATE TABLE burgers (
     devoured BOOL DEFAULT false,
     PRIMARY KEY (id)
 );
+SELECT * FROM burgers

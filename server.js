@@ -1,5 +1,5 @@
 var express = require("express");
-var PORT = process.env.PORT || 3306;
+var PORT = process.env.PORT || 3000;
 var app = express();
 
 //connect to public folder
@@ -18,5 +18,5 @@ var routes = require("./controllers/burgerController.js");
 app.use(routes);
 
 app.listen(PORT, function(){
-    console.log("Listen on port: %s; PORT");
+    console.log("Listen on port: " + PORT);
 });

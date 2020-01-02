@@ -13,7 +13,7 @@ var burger = {
         ], cb);
     },
     update: function(id, cb){
-        var condition= "id=" + id;
+        var condition= "id= " + id;
         orm.update("burgers", {
             devoured: true
         }, condition, cb);

@@ -3,7 +3,7 @@ var PORT = process.env.PORT || 3000;
 var app = express();
 
 //connect to public folder
-app.use(express.static("./public"));
+app.use(express.static(__dirname + "./public"));
 
 //parse app
 app.use(express.urlencoded({ extended: true}));

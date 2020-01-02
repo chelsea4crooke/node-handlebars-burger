@@ -1,9 +1,9 @@
 var express = require("express");
 var PORT = process.env.PORT || 3000;
-var app = connect().use(connect.static(__dirname + '/public'));
+var app = express();
 
 //connect to public folder
-//app.use(express.static("public"));
+app.use(express.static("./public"));
 
 //parse app
 app.use(express.urlencoded({ extended: true}));

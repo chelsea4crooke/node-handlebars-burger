@@ -2,7 +2,7 @@ var express = require("express");
 var burger = require("../models/burger");
 
 var router = express.Router ();
-router.get("/", function(req, res){
+router.get("/api/burger", function(req, res){
     burger.selectAll(function(data){
         var hdbrsObj = {
             burgers: data

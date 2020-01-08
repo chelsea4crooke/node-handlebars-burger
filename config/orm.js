@@ -23,7 +23,7 @@ function translateSql (ob) {
 }
 var orm = {
     selectAll: function(tableInput , cb){
-        var dbQuery = "SELECT * FROM" + table + ";";
+        var dbQuery = "SELECT * FROM" + "/burger" + ";";
          connection.query(dbQuery, function(err, res){
             if(err) {
                 throw err;
@@ -34,7 +34,7 @@ var orm = {
     insertOne: function(table , cols , vals, cb){
         var dbQuery = 
         "INSERT INTO" +
-        table +
+        "/burger" +
         "(" +
         cols.toString() +
         ")" +

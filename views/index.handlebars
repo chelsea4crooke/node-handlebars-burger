@@ -1,60 +1,62 @@
-<div class="container">
-	<div class="jumbotron">
-		<h1>Eat at Joe's Burgers</h1>
-			<img src="../public/images/burger.png" alt="burger">
-		<h3>You Mak'em -- You Eat'em</h3>
-		<h2>Make the Burger</h2>
+<div class="container" id="container">
+    <div class="jumbotron" id="header">
+    <h1 id="eat"><strong>Eat the burger, won't ya?</strong></h1>
+        <img src="../public/images/burger.png" id="burger"height="300" width="500">
+    </div>
 
 
-		<panel>
-			<form class="create-form">
-				<div class="form-group">
-					<label for="makeburger">Make a New Burger</label>
-					<input type="text" id="makeburger" name="burger" required="true">
-					<button type="submit" class="btn btn-success" id="addburger">Make Your Burger</button>
-					</button>
-				</div>
-			</form>
-		</panel>
-	</div>
-	{{!-- end of jumbotron --}}
+    <div class="row">
+        <div class="col-sm-12">
+            <form class="create-update-form" action="/burgers" method="POST">
 
-	<div class="row">
-		<div class="col-sm-6">
-			<div class="panel panel-default">
-				<div class="panel-heading" id="leftside"><strong>Order Burger</strong></div>
-				<div class="panel-body">
-					<ul>
-						{{#each burgers}}
-						{{#unless devoured}}
-						<span><strong> {{ this.id }} - {{ this.burger_name }}</strong></span>
-						<button type="button" class="eatburger btn btn-warning" id="eatbutton" data-id="{{ this.id }}"
-						  data-newDevoured="{{devouer}}"><span name="Devour-It"></span>Order to Eat!</button>
-						<hr>
-						{{/unless}}
-						{{/each}}
-					</ul>
-				</div>
-			</div>
+			<div class="form-group" id="add">
+                    <h3 class="title">A burger by any other name would taste just as juicy. But go ahead and add your burger name here.</h3>
+                    <br>
+                    <textarea id="box" class="form-control input-lg" type="text" name="b_name" rows="3"></textarea>
+                    </div>
+                <button type="submit" id="order" class="bt btn-default btn-lg">Order Up!</button>
+                </form>
+        </div>
+    </div>
+   <div>
+   <br>
+   <hr id="line">
+		<div class="col-sm-4" id="yum">
+			<div class="panel-panel default">
+			<h3 class="title">Say hello to my friend:</h3>
+				<ul class="list-group">
+				{{#each burgers}}
+					{{#unless this.devoured}}
+					<li class="list-group-item">
+						<div class="input-group">
+							<p class="lead"> {{this.burger_name}} </p>
+							<span class="input-group-btn">
+								<form action="burgers/{{this.id}}?_method=PUT" method="POST">
+									<input type="hidden" name="devoured" value="true">
+									<button id="button" class="btn btn-default btn-lg" type="submit">YUM!</button>
+								</form>
+							</span>
+						</div>
+					</li>
+					{{/unless}}
+				{{/each}}
+			</ul>
 		</div>
-		<div>
-			<div class="col-sm-6">
-				<div class="panel panel-default">
-				<div class="panel-heading" id="rightside"><strong>Eat Your Burger</strong></div>
-				<div class="panel-body">
-					<ul>
-						{{#each burgers}}
-						{{#if devoured}}
-						<span><strong> {{ this.id }} - {{ this.burger_name }} </strong></span>
-						<button type="button" class="trashburger btn btn-danger" id="trashbutton" data-id="{{ this.id }}"
-						  data-newDevoured="{{devouer}}"><span class="fa fa-trash"></span>  Done Eat'n It</button>
-						<hr>
-						{{/if}}
-						{{/each}}
-					</ul>
-				</div>
-			</div>
-					
+	</div>
+</div>
+<div>
+		<div class="col-sm-4" id="devoured">
+		<h3 id="heaven">All of the best burgers go to heaven:</h3>
+			<div class="panel panel-default">
+				<ul class="list-group">
+				{{#each burgers}}
+					{{#if this.devoured}}
+					<li class="list-group-item">
+						<p class="lead">{{this.burger_name}} </p>
+					</li>
+					{{/if}}
+				{{/each}}
+				</ul>
 			</div>
 		</div>
 	</div>

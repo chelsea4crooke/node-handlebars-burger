@@ -1,39 +1,35 @@
 var express = require("express");
+var router = express.Router();
 var burger = require("../models/burger");
 
-var router = express.Router();
-
 router.get("/", function(req, res) {
-    console.log("selectAll from burgerController.js: ", req + " " + res);
+    res.redirect("/burgers");
+});
 
-    burger.selectAll(function(data) {
-        var hdbarsObj = {burgers: data};
-        console.log(hdbarsObj);
-        res.render("index", hdbarsObj);
+router.get("/burgers", function(req, res) {
+    burger.all(function(data) {
+        var handlebarsObject = {
+        burgers: data
+    };
+    console.log(handlebarsObject);
+    res.render("index", handlebarsObject);
     });
 });
 
-   router.post("/api/burgers", function(req, res) {
-    console.log("insertOneselectAll from burgerController.js: ", req + " " + res);
-       burger.insertOne(["burger_name", "devoured"], [req.body.burger_name, req.body.devoured], 
-            function(result) {
-                res.json({ id: result.insertId });
-            } 
-       );
-   });
-   router.put("/api/burgers/:id", function(req, res) {
-    console.log("updateOne from burgerController.js: ", req + " " + res);
- 
-    var condition = "id = " + req.params.id;
-       console.log(condition);
-       burger.updateOne({ devoured: req.body.devoured }, condition, function(result) {
-       });
-   });
-   router.delete("/api/burgers/:id", function(req, res) {
-       var condition = "id = " + req.params.id;
-       console.log("condition: ", condition);
-       burger.deleteOne(condition, function(result) {
+router.post("/burgers", function(req, res) {
+    burger.create(
+        ["burger_name"], [req.body.b_name], function() {
+            res.redirect("/burgers");
+        });
+});
 
-      });
-   });
+router.put("/burgers/:id", function(req, res) {
+    var condition = "id = " + req.params.id;
+    console.log("condition", condition);
+    burger.update(
+    {"devoured": req.body.devoured}, condition, function(data) {
+            res.redirect("/burgers");
+    });
+});
+
 module.exports = router;
